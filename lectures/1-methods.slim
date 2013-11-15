@@ -1,0 +1,111 @@
+= slide 'Refresher', 'научихте ли нещо предния път?' do
+  ul
+    li.action
+      p <code>обект.съобщение</code> изпраща <code>съобщение</code> на <code>обект</code> и той отговаря
+      annotate:
+        'gnome'.reverse  #=>
+    li.action 
+      p числата и низовете са обекти и могат да получават съобщения
+      annotate:
+        2.even?  #=>
+        'miley'.capitalize  #=>
+    li.action 
+      p можем да слагаме имена на обектите и да ги достъпваме чрез тях
+      annotate:
+        name = 'John'
+        'Hi, my name is ' + name  #=>
+
+= slide 'Днес ще ви покажем..' do
+  list:
+    какво са съобщенията
+    как се създават
+    на кого се пращат
+    как можем да пращаме допълнителна информация с тях
+
+= slide 'Съобщения 101', 'малко терминология' do
+  ul
+    li.action Ще ги наричаме методи
+    li.action Ще ги викаме
+    li.action Ще ги викаме много!
+    li.action Ще си имат получател
+    li.action Ще си нямат получател
+    li.action Ще им даваме аргументи
+    li.action Ще ги дефинираме
+    li.action Ще ги научим много добре
+
+= slide 'Съобщения 102', 'защо обектите отговарят по определен начин?' do
+  ul
+    li.action Методите се определят от своите имена
+    li.action Обектите не приемат произволни методи
+    li.action Методите извикани на два различни обекта могат да върнат различни резултати
+  .action
+    annotate:
+      2 + 5  #=>
+      "2" + "5"  #=>
+
+= slide 'Съобщения 103', 'методи с аргументи' do
+  ul
+    li.action Съобщенията могат да пренасят допълнителна информация
+    li.action По-точно, можем да изпращаме 
+  br
+  .action
+    annotate:
+      "Fireworks".end_with? "work"  #=>
+      "Fork".sub "F", "Sp"  #=>
+      14.between? 7, 300  #=>
+      "Something special".index "e"  #=>
+      5.remainder 3  #=>
+
+
+= slide 'Съобщения 104', 'какво става ако извикаме метод без да кажем на кого?' do
+  ul
+    li.action В Ruby можем да извикваме метод без да указваме кой трябва да изпълни действието
+    li.action <code>puts</code> е пообен метод
+    li.action Приемете, че програмата ви е обект
+    li.action Може да й викаме методи без да указваме получател
+
+= slide 'Съобщения 105', 'как да си дефинираме метод?' do
+  ul
+    li 
+      p Става като оградим оградим код с <code>def</code>/<code>end</code>
+      example:
+        def say_hi
+          puts "Hi!"
+        end
+    li 
+      p След <code>def</code> задаваме името на метода
+      example:
+        def double(number)
+          number * 2
+        end
+    li 
+      p В скоби можем да зададем какви аргументи приема той
+      example:
+        def divisible_by?(number, divisor)
+          (number % divisor).zero?
+        end
+
+= slide 'Списъци', 'Какво представляват и имат ли те почва у нас' do
+  ul
+    li.action дефинират се с <code>[</code><code>]</code>
+    li.action могат да имат произволен брой елементи
+    li.action списъците са обекти
+  .action
+    annotate:
+      [1, 2, 3]
+      ["dog", "cat", "bird"]
+      [98, 99, "hundred", 101]
+      ["a", "b", "c", 1, 2, 3].size  #=>
+      ['one', 'two', 'three'].include? 'two'  #=>
+
+= slide 'Списъци', 'добавяне на елементи' do
+  p С методите <code>push</code> и <code><<</code> добавяме елемент отзад
+  annotate:
+    [1, 2, 3].push 4               #=>
+    [1, 2, 3] << 4                 #=>
+  p Методът <code>unshift</code> добавя елемент отпред
+  annotate:
+    ['bar', 'baz'].unshift 'foo'   #=>
+  p Методът <code>insert</code> добавя елемент на произволна позиция
+  annotate:
+    ['a', 'b', 'd'].insert 2, 'c'  #=>

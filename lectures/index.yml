@@ -1,48 +1,8 @@
 0:
-  title: 00. За курса
-  date: 2013-10-02
-  url: https://speakerdeck.com/rbfmi/ruby-2013-lecture-0
+  title: 0. Въведение в програмирането с Ruby
+  date: 2013-11-09
+  slug: 0-intro
 1:
-  title: 01. Въведение в Ruby
-  date: 2013-10-07
-  slug: 01-introduction-to-ruby
-2:
-  title: 02. Условия и списъци
-  slug: 02-conditions-arrays
-  date: 2013-10-09
-3:
-  title: 03. Хешове, методи, обекти, класове
-  slug: 03-hashes-methods-objects-classes
-  date: 2013-10-14
-4:
-  title: 04. Блокове Reloaded
-  slug: 04-blocks-reloaded
-  date: 2013-10-21
-5:
-  title: 05. Класове и обекти. Enumerable
-  slug: 05-classes-objects-enumerable
-  date: 2013-10-23
-6:
-  title: 06. Класове, именовани пространства и наследяване
-  slug: 06-classes-namespaces-inheritance
-  date: 2013-10-28
-7:
-  title: 07. Класовете и константи, case, require, Enumerator
-  slug: 07-classes-case-require-enumerator
-  date: 2013-10-30
-8:
-  title: 08. Изключения. Замразени обекти. Класови методи
-  slug: 08-exceptions-freeze-class-methods
-  date: 2013-11-04
-9:
-  title: 09. Интроспекция, част 1
-  slug: 09-introspection-part-1
-  date: 2013-11-06
-10:
-  title: 10. Интроспекция, част 2. Метапрограмиране, част 1
-  slug: 10-introspection-part-2-metaprogramming-part-1
-  date: 2013-11-11
-11:
-  title: 11. Метапрограмиране, част 2
-  slug: 11-metaprogramming-part-2
-  date: 2013-11-13
+  title: 1. Методи, списъци, хешове и условия
+  date: 2013-11-09
+  slug: 1-methods

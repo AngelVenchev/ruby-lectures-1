@@ -1,0 +1,145 @@
+= slide 'Кои сме ние?' do
+  ul
+    li.action Ангел и Станислав
+    li.action Завършили ЕГ и МГ
+    li.action Учат Компютърни Науки в СУ
+    li.action Програмисти
+
+= slide 'Това не е курс по..' do
+  list:
+    Компютърна грамотност
+    Photoshop
+    Web Design
+    Word, Excel и компания
+
+= slide 'Ще ви покажем..' do
+  list:
+    Какво значи програмиране
+    Как да го правите
+    Защо би ви харесало
+
+= slide 'Ще учим език!', '♪♫ Ruby, Ruby, Ruby, Ruby ♭♩' do
+  list:
+    Yukihiro 'Matz' Matsumoto
+    Designed for programmer productivity and fun
+    Twitter, Basecamp, Shopify, Github, etc.
+
+= slide 'За курса' do
+  list:
+    Всяка събота
+    Две групи
+    Продължителност - ?
+    Сайт на курса
+
+= slide 'Оценяване' do
+  list:
+    Домашни
+    Предизвикателства
+    Участие в час
+    Активност във форума
+
+= slide 'Добра новина', 'как да изкарате първите си точки' do
+  list:
+    Регистрирайте се на сайта
+    Сложете си снимка
+    Представете се във форума
+
+= slide 'Въпроси' do
+  empty
+
+= slide 'Цели', 'За какво ще си говорим днес?' do
+  list:
+    Примерен Ruby код
+    Числа и текст
+    Обекти и съобщения
+    Имена
+
+= slide 'irb', 'интерактивна конзола' do
+  list:
+    `irb` – Interactive Ruby
+    REPL — Read-Eval-Print Loop
+    Тук ще прекарваме доста време - и ние, и вие
+    Стартирате я  с `irb`
+
+= slide 'Ruby програми' do
+  p.action Програмите в Ruby са текстови файлове
+  p.action Подобен на английския, но не точно
+  .action
+    example:
+      5.times { print "Hi!" }
+  p.action Five times print "Hi!"
+
+= slide 'Числата', '..от където започва всичко' do
+  .action
+    p Цели числа
+    example:
+      0, 5, -3, 28, 100_000_000
+  .action
+    p Реални числа
+    example:
+      2.0, 3.14, 0.23, -16.85
+  .action
+    p Операции с числа
+    annotate:
+      5 * -3     #=>
+      5 / 2      #=>
+      5.0 / 2    #=>
+      5.0 - 2    #=>
+      11 ** 2    #=>
+      9 ** 0.5   #=>
+
+= slide 'Обекти и съобщения', 'друга гледна точка' do
+  p.action Всеки обект може да получава съобщения с конкретни имена
+  p.action <code>обект</code>.<code>съобщение</code> - изпращане <code>съобщение</code> на <code>обект</code>
+  p.action Обектите от своя страна могат да върнат отговор при получено съобщение
+  p.action Повече за тези неща другия път
+
+= slide 'Числата', 'Reloaded' do
+  p.action Числата в Ruby са обекти и могат да получават съобщения
+  .action
+    annotate:
+      4.even?      #=>
+      3.odd?       #=>
+      0.zero?      #=>
+      -2.abs       #=>
+      5.next       #=>
+      5.next.next  #=>
+
+= slide 'Низове', 'aka текст в програмата' do
+  .action
+    example:
+      "Hello, world" / 'Hello, world'
+  p.action Низовете също са обекти и могат да получават съобщения
+  .action
+    annotate:
+      "Hello, world!".length            #=>
+      "something".upcase                #=>
+      "something".downcase              #=>
+      "john".capitalize                 #=>
+      "programming".include? "gram"     #=>
+      "restaurant".start_with? "rest"   #=>
+      "football".end_with? "bull"       #=>
+      "Ho " * 3                         #=>
+      "Merry" + " Christmas"            #=>
+
+= slide 'Имена', 'друг начин да се обръщате към обектите' do
+  .action
+    annotate:
+      answer = 42
+      answer * 2  #=>
+      answer = answer + 1  #=>
+      wrong_answer = answer - 3  #=>
+      wrong_answer ** 2  #=>
+      food = 'Chunky Bacon'  #=>
+      "I love that " + food  #=>
+
+= slide 'Извеждане на екрана', 'или как да досаждате на хората с текст' do
+  .action
+    example:
+      puts "Hello, Ruby"
+  p.action Ще изведе "Hello, Ruby" на екрана
+  .action
+    example:
+      color = "red"
+      puts "My favourite color is " + color  # My favourite color is red
+      puts 21  # 21
