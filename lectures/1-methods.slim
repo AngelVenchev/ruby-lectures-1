@@ -1,15 +1,23 @@
+= slide 'Пред-предговор' do
+  ul
+    li.action Курс по програмиране с Ruby
+    li.action
+      a href="http://ruby.crashcourse.bg" ruby.crashcourse.bg
+    li.action Регистрирайте се!
+    li.action Задавайте въпроси
+
 = slide 'Refresher', 'научихте ли нещо предния път?' do
   ul
     li.action
       p <code>обект.съобщение</code> изпраща <code>съобщение</code> на <code>обект</code> и той отговаря
       annotate:
         'gnome'.reverse  #=>
-    li.action 
+    li.action
       p числата и низовете са обекти и могат да получават съобщения
       annotate:
         2.even?  #=>
         'miley'.capitalize  #=>
-    li.action 
+    li.action
       p можем да слагаме имена на обектите и да ги достъпваме чрез тях
       annotate:
         name = 'John'
@@ -46,7 +54,8 @@
 = slide 'Съобщения 103', 'методи с аргументи' do
   ul
     li.action Съобщенията могат да пренасят допълнителна информация
-    li.action По-точно, можем да изпращаме 
+    li.action По-точно, можем да изпращаме други обекти с тях
+    li.action Тези обекти се ползват за връщането на отговор
   br
   .action
     annotate:
@@ -56,47 +65,72 @@
       "Something special".index "e"  #=>
       5.remainder 3  #=>
 
+= slide 'Съобщения 103.7', 'може и със скоби' do
+  ul
+    li.action Можем да слагаме скоби около аргументите при извикване на метод
+    li.action Няма никаква разлика
+    li.action Прави се ако имаме няколко метода, които викаме последователно
+  br
+  .action
+    annotate:
+      7.between? 5, 10      #=>
+      7.between?(5, 10)     #=>
+      5.remainder(2).zero?  #=>
+
 
 = slide 'Съобщения 104', 'какво става ако извикаме метод без да кажем на кого?' do
   ul
     li.action В Ruby можем да извикваме метод без да указваме кой трябва да изпълни действието
-    li.action <code>puts</code> е пообен метод
+    li.action <code>puts</code> е подобен метод
     li.action Приемете, че програмата ви е обект
-    li.action Може да й викаме методи без да указваме получател
+    li.action Може да й викаме методи като не указваме получател
 
 = slide 'Съобщения 105', 'как да си дефинираме метод?' do
   ul
-    li 
+    li
       p Става като оградим оградим код с <code>def</code>/<code>end</code>
       example:
         def say_hi
           puts "Hi!"
         end
-    li 
+    li
       p След <code>def</code> задаваме името на метода
       example:
         def double(number)
           number * 2
         end
-    li 
+    li
       p В скоби можем да зададем какви аргументи приема той
       example:
         def divisible_by?(number, divisor)
-          (number % divisor).zero?
+          number.remainder(divisor).zero?
         end
+
+= slide 'Съобщения 106', 'изпълнение на метод' do
+  p При извикване, кодът в метода се изпълнява и се връща стойност
+  annotate:
+    def divisible_by?(number, divisor)
+      number.remainder(divisor).zero?
+    end
+
+    10.remainder(5).zero?  #=>
+    divisible_by? 10, 5    #=>
+    divisible_by? 10, 7    #=>
 
 = slide 'Списъци', 'Какво представляват и имат ли те почва у нас' do
   ul
-    li.action дефинират се с <code>[</code><code>]</code>
-    li.action могат да имат произволен брой елементи
-    li.action списъците са обекти
-  .action
-    annotate:
-      [1, 2, 3]
-      ["dog", "cat", "bird"]
-      [98, 99, "hundred", 101]
-      ["a", "b", "c", 1, 2, 3].size  #=>
-      ['one', 'two', 'three'].include? 'two'  #=>
+    li дефинират се с <code>[</code><code>]</code>
+    li могат да имат произволен брой елементи
+    li обекти са
+  annotate:
+    [1, 2, 3]
+    ["dog", "cat", "bird"]
+    [98, 99, "hundred", 101]
+    ["a", "b", "c", 1, 2, 3].length  #=>
+    ['one', 'two', 'three'].include? 'two'  #=>
+    [].empty?  #=>
+    [0, 1, 2, 3, 4, 5].reverse  #=>
+    ['I', 'love', 'lists'].join ' '  #=>
 
 = slide 'Списъци', 'добавяне на елементи' do
   p С методите <code>push</code> и <code><<</code> добавяме елемент отзад
@@ -109,3 +143,49 @@
   p Методът <code>insert</code> добавя елемент на произволна позиция
   annotate:
     ['a', 'b', 'd'].insert 2, 'c'  #=>
+
+= slide 'Списъци', 'взимане на елементи' do
+  ul
+    li Елементитие на списък се взимат по номер
+    li Номерирането започва от 0
+    li Вземането става със <code>списък[номер]</code>
+
+  annotate:
+    [1, 2, 3, 4][0]  #=>
+    [1, 2, 3, 4][1]  #=>
+    [1, 2, 3, 4][2]  #=>
+    [1, 2, 3, 4][3]  #=>
+    [1, 2, 3, 4][4]  #=>
+
+    my_cute_list = ['this', 'is', 'a', 'cute', 'list']
+    my_cute_list[3]  #=>
+
+= slide 'Хешове', 'още: хеш таблица, асоциативен списък, речник, map' do
+  ul
+    li дефинират се с <code>{</code><code>}</code>
+    li могат да имат произволен брой двойки <code>ключ => стойност</code>
+    li обекти са
+  annotate:
+    numbers = {'one' => 'eins', 'two' => 'zwei'}
+    numbers.length  #=>
+    numbers.include? 'two'  #=>
+    numbers.include? 'eins'  #=>
+    {}.empty?  #=>
+
+= slide 'Хешове', 'работа с елементи' do
+  p Можем да добавим нова ключ-стойност двойка в хеш
+  annotate:
+    numbers = {'one' => 'eins', 'two' => 'zwei'}
+    numbers['three'] = 'drei'
+    numbers['four'] = 'vier'
+    numbers  #=>
+  p Можем да вземем стойност по даден ключ
+  annotate:
+    numbers = {'one' => 'eins', 'two' => 'zwei'}
+    numbers['one']  #=>
+  p Можем да премахнем даден ключ от хеша
+  annotate:
+    numbers = {'one' => 'eins', 'two' => 'zwei'}
+    numbers.delete 'one'
+    numbers  #=>
+
