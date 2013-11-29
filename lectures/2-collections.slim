@@ -1,7 +1,7 @@
 = slide 'Колекции' do
   ul
     li съвкупност от елементи
-    li можем ги взимаме един по един
+    li можем да ги взимаме един по един
     li могат да бъдат произволен брой
 
   h2 Списъци
@@ -17,15 +17,20 @@
     ('a'..'z')   # буквите от a до z
     ('ђ'..'џ')   # други букви
 
+  p Превръщане на обхват в списък
+  annotate:
+    (1..9).to_a      #=>
+    ('h'..'n').to_a  #=>
+
 = slide '#each', 'обхождане на елементи' do
-  p Принтиране числа от списък
+  p Принтиране на числа
   annotate:
     (1..10).each do |i|
       puts i
     end
     # 1 2 3 4 5 6 7 8 9 10
 
-  p Принтиране дължината на името на филм от списък
+  p Принтиране на дължината на името на филм
   annotate:
     ["The Hunger Games", "Ender's Game"].each do |movie_name|
       puts movie_name.length
@@ -76,3 +81,63 @@
       person.first
     end
     # ["Lynn", "Jake", "Greg"]]
+
+= slide '#all?', 'истина, ако ВСЕКИ един от елементите удовлетворява дадено условие' do
+  p Всички числа от списъка ли са четни?
+  annotate:
+    [2, 4, 16, 64, 8, 10].all? do |number|
+      number.even?
+    end
+    # true
+
+  p Всяко име ли е по-късо от 6 символа?
+  annotate:
+    ["Jake", "Mike", "Miley", "Lindsworth"].all? do |number|
+      number.length < 6
+    end
+    # false
+
+= slide '#none?', 'истина, ако НИТО един от елементите не удовлетворява дадено условие' do
+  p Вярно ли е, че в обхвата няма число по-голямо от 12?
+  annotate:
+    (1..10).none? do |number|
+      number > 12
+    end
+    # true
+
+  p Вярно ли е, че в списъка няма име започващо със S?
+  annotate:
+    ["Ann", "Alex", "Stan", "Albert"].none? do |name|
+      name.start_with? "S"
+    end
+    # false
+
+= slide '#any?', 'истина, ако ПОНЕ един от елементите удовлетворява дадено условие' do
+  p Вярно ли е, че в обхвата има число, което се дели на 17?
+  annotate:
+    (1..100).any? do |number|
+      number % 17 == 0
+    end
+    # true
+
+  p Вярно ли е, че в списъка има име на филм включващо Game?
+  annotate:
+    ["Gravity", "The Hobbit", "Thor"].any? do |movie_name|
+      movie_name.include? "Game"
+    end
+    # false
+
+= slide '#one?', 'истина, ако ТОЧНО един от елементите удовлетворява дадено условие' do
+  p Вярно ли е, че в обхвата има само едно число, което се дели на 17?
+  annotate:
+    (1..20).one? do |number|
+      number % 17 == 0
+    end
+    # true
+
+  p Вярно ли е, че в списъка има само едно име на филм включващо Game?
+  annotate:
+    ["The Hunger Games", "Ender's Game", "Delivery Man"].one? do |movie_name|
+      movie_name.include? "Game"
+    end
+    # false
