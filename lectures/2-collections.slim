@@ -1,0 +1,78 @@
+= slide 'Колекции' do
+  ul
+    li съвкупност от елементи
+    li можем ги взимаме един по един
+    li могат да бъдат произволен брой
+
+  h2 Списъци
+  annotate:
+    [1, 1, 2, 3, 5, 8, 13, 21]                # поредица
+    ["Anna", "Sofia", 23, "female"]           # лични данни
+    [["Lorde", "Team"], ["Sia", "Titanium"]]  # [изпълнител, песен]
+
+  h2 Обхвати
+  annotate:
+    (1..100)     # числата от едно до сто
+    (1...100)    # същите, но без сто
+    ('a'..'z')   # буквите от a до z
+    ('ђ'..'џ')   # други букви
+
+= slide '#each', 'обхождане на елементи' do
+  p Принтиране числа от списък
+  annotate:
+    (1..10).each do |i|
+      puts i
+    end
+    # 1 2 3 4 5 6 7 8 9 10
+
+  p Принтиране дължината на името на филм от списък
+  annotate:
+    ["The Hunger Games", "Ender's Game"].each do |movie_name|
+      puts movie_name.length
+    end
+    # 16 12
+
+= slide '#select', 'филтриране на елементи' do
+  p Избиране на всички имена започващи с J
+  annotate:
+    ["John", "Mark", "Dave", "Jay"].select do |name|
+      name.start_with? 'J'
+    end
+    # ["John", "Jay"]
+
+  p Намиране на хората над 23 години
+  annotate:
+    [["Lynn", 12], ["Jake", 25], ["Greg", 43]].select do |person|
+      person.last > 23
+    end
+    # [["Jake", 25], ["Greg", 43]]
+
+= slide '#reject', 'обратната операция' do
+  p Избиране на всички имена започващи с нещо различно от J
+  annotate:
+    ["John", "Mark", "Dave", "Jay"].reject do |name|
+      name.start_with? 'J'
+    end
+    # ["Mark", "Dave"]
+
+  p Намиране на хората под 23 години
+  annotate:
+    [["Lynn", 12], ["Jake", 25], ["Greg", 43]].reject do |person|
+      person.last > 23
+    end
+    # [["Lynn", 12]]
+
+= slide '#map', 'за трансформация на колекция' do
+  p Намиране на квадратите на числа от списък
+  annotate:
+    [1, 2, 3, 4, 5, 6].map do |number|
+      number ** 2
+    end
+    # [1, 4, 9, 16, 25, 36]
+
+  p Намиране на имената на хората
+  annotate:
+    [["Lynn", 12], ["Jake", 25], ["Greg", 43]].map do |person|
+      person.first
+    end
+    # ["Lynn", "Jake", "Greg"]]
