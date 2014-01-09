@@ -1,0 +1,57 @@
+= slide 'Методи', 'дефинирали сме такива' do
+  p Пример
+  annotate:
+    def min(first, second)
+      if first > second
+        first
+      else
+        second
+      end
+    end
+
+=slide 'Методи 2', 'Метод, който вика метод' do
+  annotate:
+    def say_hi_to(name)
+      print_hi + ' ' + name
+    end
+
+    def print_hi
+      print 'hi'
+    end
+
+=slide 'Рекурсия', 'Метод, който вика себе си' do
+  annotate:
+    def print_numbers(number)
+      p number
+      print_numbers(number - 1)
+    end
+
+  p.action горното е лоша идея
+
+=slide '2 изисквания за рекурсия' do
+  annotate:
+    def numbers_up_to(number)
+      if number < 1
+        return
+      else
+        p number
+        numbers_up_to(number - 1)
+      end
+    end
+  list:
+    Рекурсивно извикване на същия метод
+    Условие за спиране на рекурсията
+
+  p.action Принтира всички числа от number до 1
+
+=slide 'Безкрайна рекурсия' do
+  annotate:
+    def print_numbers(number)
+      p number
+      print_numbers(number - 1)
+    end
+
+    print_numbers(5) #=>
+
+  p.action Грешката 'stack level too deep' означава че нямаме спиращо условие за рекурсията ни.
+  
