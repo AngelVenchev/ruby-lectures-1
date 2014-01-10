@@ -1,0 +1,103 @@
+=slide 'Обекти', 'познаваме някои от тях' do
+  annotate:
+    number = 5
+    decimal_point_number = 3.4
+    string = "word or text"
+    ["list", "of", "objects"]
+    {"hash with" => "pairs of", "keys" => "values"}
+
+=slide 'Обектите се класифицират 1', 'по типове (класове)' do
+  p Числа
+  annotate:
+    number = 5 #=>
+    number.class #=>
+
+    decimal_point_number = 3.4 #=>
+    decimal_point_number.class #=>
+
+=slide 'Обектите се класифицират 2', 'по типове (класове)' do
+  p Текст
+  annotate:
+    string1 = "word or text" #=>
+    string1.class #=>
+
+    string2 = 'word or text' #=>
+    string2.class #=>
+
+=slide 'Обектите се класифицират 3', 'по типове (класове)' do
+  p Колекции
+  annotate:
+    list_of = [0, "or", ['m','o','r','e'],"objects"] #=>
+    list_of.class #=>
+
+    hash_with_pairs_of = {"keys" => "values"} #=>
+    hash_with_pairs_of.class #=>
+
+=slide 'Monkey Patching 1' do 
+  p
+    ' В Ruby света, 
+    a href="https://en.wikipedia.org/wiki/Monkey_patch" monkey patching 
+    '  се нарича добавянето на методи в съществуващи класове. Тази практика има както добри, така и лоши страни. Когато се прави умерено, позволява да надгражда Ruby по удобни начини. Използвайки я безотговорно, може да превърнете проект в ад за поддръжка или да направите библиотека неизползваема.
+  p.action На кратко:
+  list:
+    Можем да отваряме класове и да добавяме или променяме разни неща в тях.
+    Представете си класа като една кутия с методи, константи и други шукарийки
+    Можем да отваряме тази кутия и да добаваме неща
+
+=slide 'Класове', 'Mястото, където са записани методите на дадения обект'do
+    p Нови ключови думи
+    p <code>class</code> - след него подаваме името на класа, който 'отваряме'
+    p <code>self</code> - така достъпваме обекта от дадения класц
+    p Пример с класа на целите числа
+    annotate:
+      class Fixnum 
+        def even
+          self % 2 == 0
+        end
+      end
+
+=slide 'Monkey Patching 2', 'Примери' do 
+  annotate:
+    class Fixnum
+      def neg?
+        self < 0
+      end
+    end
+    2.neg? #=>
+    -2.neg? #=>
+
+  list:
+    Отваряме класа Fixnum (клас на целите числа)
+    Създаваме метод <code>neg?</code>
+    Метода определя дали числото на което го викаме е отрицателно
+    Можем да го викаме както е показано на примера
+
+=slide 'Monkey Patching 3', 'Примери' do 
+  annotate:
+    class Array
+      def the_first
+        self.first
+      end
+    end
+
+    class Array
+      def the_first
+        first
+      end
+    end
+
+    [4,5,6,7].the_first
+
+  p горните 2 примера са еквивалентни
+
+=slide 'Monkey Patching 4', 'Примери' do
+  annotate:
+    class Array
+      def the_first
+        first
+      end
+    end
+
+  p В класа Array дефинираме метод <code>the_first</code>
+  p <code>the_first</code> вика метод <code>first</code> на <code>self</code>
+  p В такава ситуация можем да изпуснем <code>self</code>
