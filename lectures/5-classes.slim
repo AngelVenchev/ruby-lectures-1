@@ -1,0 +1,137 @@
+=slide 'Последния път', 'monkey patching' do
+  list:
+    Говорихме за добавяне на функционалност
+    Отваряне на съществуващи класове
+    Замазването им
+
+=slide 'Днес', 'Ще говорим за създаване на класове' do
+  p Какъв е смисъла да имаме наши класове?
+  p Нима съществуващите не ни позволяват да правим всичко?
+  p.action Не и ако искаме да правим по-сложни неща
+
+=slide 'Класове 1' do
+  p Класове се създават отново с ключовата думичка <code>class</code>
+  p Кода се индентира с два интервала навътре и там се пише съдържанието
+  p Пример:
+  annotate:
+    class Person
+      def say_hi
+        puts "hi!"
+      end
+    end
+  p Името на класа винаги е с главна буква
+
+=slide 'Класове 2' do
+  p <b>Инстанции</b> на класовете създаваме с метода <code>new</code>
+  annotate:
+    class Person
+      def introduction
+        "beer!"
+      end
+    end
+
+    homer_simpson = Person.new #=>
+    homer_simpson.introduction #=>
+
+=slide 'Методи', 'в нашите класове' do
+  p Дефинираме клас и дефинираме методи в него както обикновено
+  annotate:
+    class Fox
+      def what_does_the_fox_say
+        "Wa-pa-pa-pa-pa-pa-pow"
+      end
+
+      def is_dog?
+        false
+      end
+    end
+
+    random_fox = Fox.new #=>
+    random_fox.what_does_the_fox_say #=>
+  p След това можем да ги викаме на <b>инстанции</b> от този клас
+
+=slide 'Данни 1' do
+  p В класовете си можем да пазим данни
+  p Данните се пазят в променливи със специални имена
+  p Те започват с <code>@</code> (кльомба, маймунка, shift + 2)s
+  annotate:
+    # ne пишете методите си така! Никога!
+    # дори ако ви се налага да ги събирате на един слайд
+    class Person
+      def set_name(name) @name = name end
+
+      def get_name() @name end
+    end
+    miley = Person.new
+    miley.get_name #=>
+    miley.set_name("Cyrus")
+    miley.get_name #=>
+
+=slide 'Данни 2' do
+  p Данните са отделни за всяка <b>инстанция</b> на класа
+  p Те се пазят в <b>инстанцията</b>, а не в класа
+  annotate:
+    class Person
+      def set_name(name)
+        @name = name
+      end
+      def get_name
+        @name
+      end
+    end
+    lil_wayne = Person.new
+    will_i_am = Person.new
+    will_i_am.set_name("Will")
+    will_i_am.get_name #=>
+    lil_wayne.get_name #=>
+
+=slide 'Инициализаця', 'Можем да зададем данните още при създаване на обекта' do
+  p Имаме специален метод, който можем да дефинираме в класа <code>initialize</code>
+  annotate:
+    class Person
+      def initialize(name)
+        @name = name
+      end
+      def get_name
+        @name
+      end
+    end
+
+    goshko = Person.new("Goshko")
+    goshko.get_name #=>
+
+=slide 'Данни 3' do
+  p Нещата стават по-смислени ако имаме повече данни
+  annotate:
+    class Point3D
+      def initialize(x, y, z)
+        # x, y  и z съществуват до end на текущия метод
+        @x, @y, @z = x, y, z # Паралелно присвояване FTW
+        # @x, @y и @z съществуват докато инстанцията на класа съществува
+      end
+
+      def get_coordinates
+        "x: #{@x}, y: #{@y}, z: #{@z}"
+      end
+    end
+
+    point = Point3D.new(1,6,5)
+    point.get_coordinates #=>
+
+=slide 'Данни 4', 'можем да използваме и инстанции на наши класове' do
+  annotate:
+    # Пишем методите така за да ги съберем на един слайд! Не пишете така!
+    class Dog
+      def initialize(name) @name = name end
+      def get_name() @name end
+    end
+
+    class Person
+      def get_dog(kuche) @dog = kuche end
+      def introduce_dog() "My dog's name is #{@dog.get_name}" end
+    end
+
+    some_dog = Dog.new('Sharo')
+    ivan = Person.new
+    ivan.get_dog(some_dog)
+    ivan.introduce_dog #=>
