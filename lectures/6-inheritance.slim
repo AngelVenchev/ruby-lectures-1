@@ -1,0 +1,258 @@
+=slide 'Наследяване', 'WTF did someone die?' do
+  list:
+    Какво ще наследяваме?
+    Всичко!
+    Кога ще ги наследяваме
+    Сега!
+    Как ще ги наследяваме
+    <b><</b>
+
+=slide 'Пример 1' do
+  p Наследяването се случва в контекста на класове
+  p Тоест един клас наследява друг
+  p Имаме класа животно
+  annotate:
+    class Animal
+      def initialize(name)
+        @name = name
+      end
+    end
+
+=slide 'Пример 1' do
+  p В случая казваме, че Dog наследява от Animal
+  example:
+    class Dog < Animal
+      def say_name
+        @name
+      end
+    end
+
+    dog = Dog.new("Josh")
+    dog.say_name # Josh
+
+=slide 'Специален символ < ' do
+  p Символът <b><</b> оказва кой клас от кой наследява
+  annotate:
+
+    # Базов клас
+    class Person
+    end
+
+    # Candidate наследява от Person
+    class Candidate < Person
+    end
+
+    # Employee наследява от Person
+    class Employee < Person
+    end
+
+
+= slide 'Наследяване', 'ограничения' do
+  list:
+    Може да наследите най-много от един родител
+    В наследника имате достъп до всички методи
+    В наследника имате достъп до всички полета
+    Ако не определите родител, класът наследява от `Object`
+    Всеки клас в Ruby наследява от `Object` (с изключение на родителя на `Object`...)
+
+
+= slide 'Наследяване', '#is_a? и #instance_of?' do
+  annotate:
+    class Vehicle; end
+    class Car < Vehicle; end
+
+    vehicle = Vehicle.new
+    car = Car.new
+
+    vehicle.is_a? Vehicle        # =>
+    car.is_a? Car                # =>
+    car.is_a? Vehicle            # =>
+
+    vehicle.instance_of? Vehicle # =>
+    car.instance_of? Car         # =>
+    car.instance_of? Vehicle     # =>
+
+= slide 'Наследяване', '#is_a? и #instance_of? (2)' do
+  p <code>#is_a?</code> има синоним <code>#kind_of?</code>
+  annotate:
+    class Base; end
+    class SpaceStation < Base; end
+
+    base    = Base.new
+    station = SpaceStation.new
+
+    base.kind_of? Base            # =>
+    station.kind_of? SpaceStation # =>
+    station.kind_of? Base         # =>
+
+= slide 'Наследяване', '#is_a? и #instance_of? (3)' do
+  p.action Ползвайте <code>#is_a?</code> по принцип.
+  p.action Ползвайте <code>#instance_of?</code> само когато искате да не бъде наследник.
+  p.action Най-добре да не ви се налага да ги ползвате въобще
+  p.action
+    a href="https://www.google.bg/?gfe_rd=cr&ei=I3wnU5CBA6rc8geAs4HYBA#q=duck+typing" duck typing
+
+= slide 'super' do
+  p Може да предефинирате метод и да извикате версията на родителя със <code>super</code>.
+
+  annotate:
+    class Person
+      def introduction_to(other)
+        "Hello #{other}."
+      end
+    end
+
+    class PolitePerson < Person
+      def introduction_to(other)
+        super("Mr. #{other}") + " How do you do?"
+      end
+    end
+
+    queen = PolitePerson.new
+    queen.introduction_to('Smith') # =>
+
+= slide 'super (2)' do
+  p Ако извикате <code>super</code> без скоби родителският метод получава същите аргументи.
+
+  annotate:
+    class Person
+      def introduction_to(other)
+        "Hello #{other}."
+      end
+    end
+
+    class PolitePerson < Person
+      def introduction_to(other)
+        super + " How do you do?"
+      end
+    end
+
+    queen = PolitePerson.new
+    queen.introduction_to('Smith') # =>
+
+= slide 'super (3)' do
+  p <code>super</code> и <code>super()</code> са различни:
+
+  annotate:
+    class Person
+      def introduction_to(other)
+        "Hello #{other}."
+      end
+    end
+
+    class PolitePerson < Person
+      def introduction_to(other)
+        super() + " How do you do?"
+      end
+    end
+
+    queen = PolitePerson.new
+    queen.introduction_to('Smith') #!
+
+= slide 'Класови методи' do
+  p Може да дефинирате класови методи така:
+
+  annotate:
+    class Something
+      def Something.answer
+        42
+      end
+    end
+
+    Something.answer   # =>
+
+= slide 'Класови методи (2)' do
+  p Не може да ги викате неквалифицирано от инстанцията:
+
+  annotate:
+    class Something
+      def Something.answer
+        42
+      end
+
+      def do_stuff
+        answer             #!
+        Something.answer   # =>
+      end
+    end
+
+    thing = Something.new
+    thing.answer           #!
+    Something.answer       # =>
+
+    thing.do_stuff
+
+= slide 'Класови методи (3)' do
+  p Достъпни са в наследниците:
+
+  annotate:
+    class Base
+      def Base.answer() 42 end
+    end
+
+    class Derived < Base
+      def Derived.say_answer
+        answer         # =>
+        Base.answer    # =>
+      end
+    end
+
+    Derived.answer     # =>
+    Base.answer        # =>
+
+    Derived.say_answer
+
+= slide 'Класови методи (4)' do
+  p Има и други начини за дефиниция на класови методи:
+
+  list:
+    Този начин, който ви показахме, е неканоничният
+    Кои са другите начини, ще разберете в следващите слайдове
+
+= slide 'Класови методи (5)' do
+  list:
+    Показах ви как се дефинират и викат
+    Не ви показах как са реализирани и къде стоят
+    Имат доста оплетена семантика в Ruby
+    Засега се опитвайте да не ползвате класови методи
+
+= slide 'Класови методи (6)', 'преговор' do
+  example:
+    class TodoList
+      def TodoList.parse(todos_string)
+        # Solution lost.
+      end
+    end
+
+= slide 'Класови методи (7)', 'втори начин' do
+  p Този начин е еквивалентен на предишния слайд:
+
+  example:
+    class TodoList
+      def self.parse(todos_string)
+        # Solution lost.
+      end
+    end
+
+  p.action Това работи, понеже:
+  list:
+    Тялото на класа е изпълним код
+    Както във всеки друг контекст в Ruby, и там имаме `self`
+    `self` и `TodoList` в тялото на класа са едно и също
+
+= slide 'Класови методи (8)', 'трети начин' do
+  example:
+    class TodoList
+      class << self
+        def parse(todos_string)
+          # Solution lost.
+        end
+      end
+    end
+
+= slide 'Класови методи', 'конвенции' do
+  list:
+    Първият начин не се ползва (`def ClassName.method_name() end`)
+    При дефиниране на един, максимум два класови метода, ползваме втория начин
+    При дефиниране на повече от един класов метод, обикновено ползваме третия начин
+    За справка – [ръководството по стил](https://github.com/fmi/ruby-style-guide#classes)
